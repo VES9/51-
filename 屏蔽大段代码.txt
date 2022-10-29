@@ -1,0 +1,17 @@
+#if 0
+
+
+trhyfgrh
+sgdfgerghy
+dfgh
+
+
+
+#endif
+
+
+
+trhyfgrh
+sgdfgerghy
+dfgh
+中间的这些代码都会被屏蔽掉，keil不会对其进行编译，相当于注释

@@ -1,0 +1,3 @@
+".\Objects\vdstyrtd.obj" 
+TO ".\Objects\erts" 
+PRINT(".\Listings\erts.m51")

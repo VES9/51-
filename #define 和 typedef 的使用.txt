@@ -1,0 +1,23 @@
+#define 的使用：
+
+#define uchar unsignedchar         这样使用的话就把unsigned char 给替换成uchar了,以后定义一个unsigned char 类型的数据直接 uchar a=0;就可以了(结尾没有分号，新名字在前老名字在后）
+typedef unsigned char uchar;       这样使用的话就把unsigned char 给替换成uchar了,以后定义一个unsigned char 类型的数据直接 uchar a=0;就可以了(结尾有分号，新名字在后老名字在前）
+
+
+
+区别：typedef只能对变量取别名 
+         而#define可以任意替换
+
+例：typedef int i8;              这样使用的话就把int 给替换成i8了,以后定义一个int类型的数据直接 i8 a=0;就可以了
+      typedef char c8;            这样使用的话就把char 给替换成c8了,以后定义一个char类型的数据直接 c8 a=‘A';就可以了
+      typedef float f8;            这样使用的话就把float 给替换成f8了,以后定义一个flloat类型的数据直接 f8 a=3.14;就可以了
+
+
+
+#define kong 32    
+#define erwt 5674
+#define up 22
+上述这些#define都是可以的
+
+
+在实际编程中，如果我们要给数据类型取别名，尽量用typedef少用#define 虽然二者都可以，但是typedef是专门为数据类型取别名的。
