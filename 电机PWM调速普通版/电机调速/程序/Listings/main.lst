@@ -1,0 +1,268 @@
+C51 COMPILER V9.54   MAIN                                                                  05/16/2020 13:28:03 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          /**************************************************************
+   2          文件名  :    mian.c
+   3          作者     : 智慧小巷
+   4          版本     : V1.0
+   5          描述     : 电机PWM调速
+   6          其他     : 无
+   7          CSDN博客     : https://blog.csdn.net/dwh1314/article/details/106158025
+   8          微信公众号    : 智慧小巷
+   9          日志     : 初版V1.0 2020/3/10 创建
+  10          **************************************************************/
+  11          #include <reg52.h>
+  12          #define uchar unsigned char
+  13          #define uint unsigned int
+  14          #define motorA  0
+  15          #define motorB  1
+  16          //定义输出IN1-IN4
+  17          sbit IN1 = P2^0;
+  18          sbit IN2 = P2^1;
+  19          sbit IN3 = P2^2;
+  20          sbit IN4 = P2^3;
+  21          sbit ENA = P2^4;  //电机A使能
+  22          sbit ENB = P2^5;  //电机B使能
+  23          sbit speed_add = P1^0;  //速度加
+  24          sbit speed_mus = P1^1;  //速度减
+  25          sbit forward = P1^2;  //正转
+  26          sbit reversal = P1^3; //反转
+  27          sbit A_OF_B = P1^4; //选择A/B
+  28          bit flag; 
+  29          
+  30          //电机初速度 0-20，20电机停转，0最快
+  31          uchar speedA = 10;
+  32          uchar speedB = 10;
+  33          
+  34          /*
+  35           * @description : 延时函数
+  36           * @param     : 延时时长约1ms
+  37           * @return    : 无
+  38           */
+  39          void delay(unsigned int j)
+  40          {
+  41   1          unsigned int x;
+  42   1          for(x=0;x<j;x++);
+  43   1      }
+  44          
+  45          /*
+  46           * @description : 电机A正转
+  47           * @param     :无
+  48           * @return    : 无
+  49           */
+  50          void motorA_forward()
+  51          {
+  52   1          IN1=0;
+  53   1          IN2=1;
+  54   1      }
+C51 COMPILER V9.54   MAIN                                                                  05/16/2020 13:28:03 PAGE 2   
+
+  55          
+  56          
+  57          
+  58          /*
+  59           * @description : 电机A反转
+  60           * @param     :无
+  61           * @return    : 无
+  62           */
+  63          void motorA_reversal()
+  64          {
+  65   1          IN1=1;
+  66   1          IN2=0;
+  67   1      }
+  68          
+  69          
+  70          
+  71          /*
+  72           * @description : 电机B正转
+  73           * @param     :无
+  74           * @return    : 无
+  75           */
+  76          void motorB_forward()
+  77          {
+  78   1          IN3=0;
+  79   1          IN4=1;
+  80   1      }
+  81          
+  82          
+  83          
+  84          /*
+  85           * @description : 电机B正转
+  86           * @param     :无
+  87           * @return    : 无
+  88           */
+  89          void motorB_reversal()
+  90          {
+  91   1          IN3=1;
+  92   1          IN4=0;
+  93   1      }
+  94          
+  95          
+  96          
+  97          /*
+  98           * @description : 按键是扫描
+  99           * @param     :无
+ 100           * @return    : 无
+ 101           */
+ 102          void key_scan()
+ 103          {
+ 104   1          //速度加
+ 105   1          if(speed_add==0)
+ 106   1          {
+ 107   2              //延时消抖
+ 108   2              delay(10);
+ 109   2              if(speed_add==0)
+ 110   2              {
+ 111   3                  if(flag == motorA)
+ 112   3                  {
+ 113   4                      if(speedA>0)speedA-=2;
+ 114   4                  }
+ 115   3                  if(flag == motorB)
+ 116   3                  {
+C51 COMPILER V9.54   MAIN                                                                  05/16/2020 13:28:03 PAGE 3   
+
+ 117   4                      if(speedB>0)speedB-=2;
+ 118   4                  }
+ 119   3                  while(!speed_add);
+ 120   3                  return ;
+ 121   3              }
+ 122   2          }
+ 123   1          
+ 124   1          //速度减
+ 125   1          if(speed_mus==0)
+ 126   1          {
+ 127   2            delay(10);
+ 128   2            if(speed_mus==0)
+ 129   2              {
+ 130   3                  if(flag == motorA)
+ 131   3                  {
+ 132   4                      if(speedA<=20)speedA+=2;
+ 133   4                  }
+ 134   3                  if(flag == motorB)
+ 135   3                  {
+ 136   4                      if(speedB<=20)speedB+=2;
+ 137   4                  }
+ 138   3              }
+ 139   2              while(!speed_mus);
+ 140   2              return ;
+ 141   2          }
+ 142   1          
+ 143   1          //前进
+ 144   1          if(forward==0)
+ 145   1          {
+ 146   2              delay(10);
+ 147   2              if(forward==0)
+ 148   2              { 
+ 149   3                  //根据标志位判断当前是控制的电机A还是B
+ 150   3                  if(flag == motorA)motorA_forward();
+ 151   3                  if(flag == motorB)motorB_forward();
+ 152   3              }
+ 153   2              while(!forward);
+ 154   2              return ;
+ 155   2          }
+ 156   1          
+ 157   1          //后退
+ 158   1          if(reversal==0)
+ 159   1          {
+ 160   2              delay(10);
+ 161   2              if(reversal==0)
+ 162   2              {
+ 163   3                  //根据标志位判断当前是控制的电机A还是B
+ 164   3                  if(flag == motorA)motorA_reversal();
+ 165   3                  if(flag == motorB)motorB_reversal();
+ 166   3              }
+ 167   2              while(!reversal);
+ 168   2              return ;
+ 169   2          }
+ 170   1          
+ 171   1          //选择电机A或B
+ 172   1          if(A_OF_B==0)
+ 173   1          {
+ 174   2              delay(10);
+ 175   2              if(A_OF_B==0)
+ 176   2              {
+ 177   3                  //切换控制的点击
+ 178   3                  flag = flag==motorA? motorB : motorA;
+C51 COMPILER V9.54   MAIN                                                                  05/16/2020 13:28:03 PAGE 4   
+
+ 179   3              }
+ 180   2              while(!A_OF_B);
+ 181   2              return ;
+ 182   2          }
+ 183   1      }
+ 184          
+ 185          
+ 186          /*
+ 187           * @description : 主函数 程序入口
+ 188           * @param     :无
+ 189           * @return    : 无
+ 190           */
+ 191          void main()
+ 192          {
+ 193   1          EA=1;//打开总中断 
+ 194   1          TMOD=0x01; //定时器工作方式
+ 195   1          TH0=(65535-1000)/256; //初值约1ms
+ 196   1          TL0=(65535-1000)%256; 
+ 197   1          ET0=1;  //打开定时器中断
+ 198   1          TR0=1;  //打开定时器
+ 199   1          flag=motorA;  //默认选择电机A
+ 200   1          while(1)
+ 201   1          {
+ 202   2              key_scan(); //按键扫描
+ 203   2          }
+ 204   1      }
+ 205          
+ 206          
+ 207          /*
+ 208           * @description : 定时器中断函数,利用定时器产生PWM调速信号
+ 209           * @param     :无
+ 210           * @return    : 无
+ 211           */
+ 212          void Time()   interrupt 1
+ 213          {
+ 214   1            
+ 215   1        
+ 216   1          static uchar count=0; 
+ 217   1          TH0=(65535-1000)/256;  //重装初值
+ 218   1          TL0=(65535-1000)%256;  //重装初值
+ 219   1          count++;
+ 220   1          if(count==20)count=0;
+ 221   1          if(count>=speedA)
+ 222   1          {
+ 223   2              ENA=1;
+ 224   2          }
+ 225   1          else{
+ 226   2              ENA=0;
+ 227   2          }
+ 228   1          if(count>=speedB)
+ 229   1          {
+ 230   2              ENB=1;
+ 231   2          }
+ 232   1          else{
+ 233   2              ENB=0;
+ 234   2          }
+ 235   1      
+ 236   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    273    ----
+C51 COMPILER V9.54   MAIN                                                                  05/16/2020 13:28:03 PAGE 5   
+
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
