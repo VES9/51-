@@ -1,0 +1,3 @@
+".\Objects\a2.obj" 
+TO ".\Objects\qwertyuiop" 
+PRINT(".\Listings\qwertyuiop.m51")

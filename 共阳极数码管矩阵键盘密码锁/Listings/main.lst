@@ -1,0 +1,310 @@
+C51 COMPILER V9.54   MAIN                                                                  10/07/2022 19:11:22 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          #include <intrins.h>
+   3          #define uchar unsigned char
+   4          #define schar static char
+   5          #define uint unsigned int
+   6          sfr AE=0x80;//ถฮัก
+   7          sfr AR=0xa0;//ฮปัก
+   8          uchar duan[]={0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90,0x88,0x83,0xC6,0xA1,0x86,0x8E};
+   9          uchar wei[]={0xFE,0xFD,0xFB,0xF7,0xEF,0xDF,0xBF,0x7F,0x7F,0x7F};
+  10          uchar temp=0;
+  11          
+  12          void delay(uint n)
+  13          {
+  14   1        uint i=0;
+  15   1        uint j=0;
+  16   1        for(i=0;i<n;i++)
+  17   1        {
+  18   2          for(j=0;j<120;j++);
+  19   2        }
+  20   1      }
+  21          
+  22          
+  23          //void display(uchar a,b,c,d,e,f)
+  24          //{
+  25          //  AR=wei[0];
+  26          //  AR=duan[a];
+  27          //  delay(5);
+  28          //  AR=0xff;
+  29          //  
+  30          //  AR=wei[1];
+  31          //  AR=duan[b];
+  32          //  delay(5);
+  33          //  AR=0xff;
+  34          
+  35          //  AR=wei[2];
+  36          //  AR=duan[c];
+  37          //  delay(5);
+  38          //  AR=0xff;
+  39          //  
+  40          //  AR=wei[3];
+  41          //  AR=duan[d];
+  42          //  delay(5);
+  43          //  AR=0xff;
+  44          //  
+  45          //  AR=wei[4];
+  46          //  AR=duan[e];
+  47          //  delay(5);
+  48          //  AR=0xff;
+  49          //  
+  50          //  AR=wei[5];
+  51          //  AR=duan[f];
+  52          //  delay(5);
+  53          //  AR=0xff;
+  54          //  
+C51 COMPILER V9.54   MAIN                                                                  10/07/2022 19:11:22 PAGE 2   
+
+  55          //}
+  56          
+  57          void keyscan()
+  58          {
+  59   1        P3=0xfe;
+  60   1        temp=P3;
+  61   1        temp=temp&0xf0;
+  62   1        if(temp!=0xf0)
+  63   1        {
+  64   2          delay(5);
+  65   2          while(temp!=0xf0)
+  66   2          {
+  67   3            temp=P3;
+  68   3            switch(temp)
+  69   3            {
+  70   4              case 0xee:
+  71   4              AE=duan[0];
+  72   4              AR=~wei[0];
+  73   4              break;
+  74   4              
+  75   4              case 0xde:
+  76   4                AE=duan[1];
+  77   4              AR=~wei[0];
+  78   4              break;
+  79   4              
+  80   4              case 0xbe:
+  81   4              AE=duan[2];
+  82   4              AR=~wei[0];
+  83   4              break;
+  84   4              
+  85   4              case 0x7e:
+  86   4                AE=duan[3];
+  87   4              AR=~wei[0];
+  88   4              break;
+  89   4      
+  90   4            }
+  91   3          }
+  92   2        }
+  93   1          
+  94   1          
+  95   1        P3=0xfe;
+  96   1        temp=P3;
+  97   1        temp=temp&0xf0;
+  98   1        if(temp!=0xf0);
+  99   1        {
+ 100   2          delay(5);
+ 101   2          while(temp!=0xf0)
+ 102   2          {
+ 103   3            temp=P3;
+ 104   3            switch(temp)
+ 105   3            {
+ 106   4              case 0xed:
+ 107   4              AE=duan[4];
+ 108   4              AR=~wei[0];
+ 109   4              break;
+ 110   4              
+ 111   4              case 0xdd:
+ 112   4                AE=duan[5];
+ 113   4              AR=~wei[0];
+ 114   4              break;
+ 115   4              
+ 116   4              case 0xbd:
+C51 COMPILER V9.54   MAIN                                                                  10/07/2022 19:11:22 PAGE 3   
+
+ 117   4              AE=duan[6];
+ 118   4              AR=~wei[0];
+ 119   4              break;
+ 120   4              
+ 121   4              case 0x7d:
+ 122   4              AE=duan[7];
+ 123   4              AR=~wei[0];
+ 124   4              break;
+ 125   4      
+ 126   4            }
+ 127   3          }
+ 128   2        }
+ 129   1        
+ 130   1        
+ 131   1      }
+ 132          
+ 133                
+ 134              
+ 135              
+ 136              
+ 137          void main()
+ 138          {
+ 139   1        while(1)
+ 140   1        {
+ 141   2          keyscan();
+ 142   2        }
+ 143   1      }
+ 144              
+ 145              
+ 146              
+ 147              
+ 148              
+ 149              
+ 150              
+ 151              
+ 152              
+ 153              
+ 154              
+ 155              
+ 156              
+ 157              
+ 158              
+ 159              
+ 160              
+ 161              
+ 162              
+ 163              
+ 164              
+ 165              
+ 166              
+ 167              
+ 168              
+ 169              
+ 170              
+ 171              
+ 172              
+ 173              
+ 174              
+ 175              
+ 176              
+ 177              
+ 178              
+C51 COMPILER V9.54   MAIN                                                                  10/07/2022 19:11:22 PAGE 4   
+
+ 179              
+ 180              
+ 181              
+ 182              
+ 183              
+ 184              
+ 185              
+ 186              
+ 187              
+ 188              
+ 189              
+ 190              
+ 191              
+ 192              
+ 193              
+ 194              
+ 195              
+ 196              
+ 197              
+ 198              
+ 199              
+ 200              
+ 201              
+ 202              
+ 203              
+ 204              
+ 205              
+ 206              
+ 207              
+ 208              
+ 209              
+ 210            
+ 211            
+ 212            
+ 213            
+ 214            
+ 215            
+ 216            
+ 217            
+ 218            
+ 219            
+ 220            
+ 221            
+ 222            
+ 223            
+ 224            
+ 225            
+ 226            
+ 227            
+ 228            
+ 229            
+ 230            
+ 231            
+ 232            
+ 233            
+ 234            
+ 235            
+ 236            
+ 237            
+ 238            
+ 239            
+ 240            
+C51 COMPILER V9.54   MAIN                                                                  10/07/2022 19:11:22 PAGE 5   
+
+ 241            
+ 242            
+ 243            
+ 244            
+ 245            
+ 246            
+ 247            
+ 248            
+ 249            
+ 250            
+ 251            
+ 252            
+ 253            
+ 254            
+ 255            
+ 256            
+ 257            
+ 258            
+ 259            
+ 260            
+ 261            
+ 262            
+ 263          
+ 264          
+ 265          
+ 266          
+ 267          
+ 268          
+ 269          
+ 270          
+ 271          
+ 272          
+ 273          
+ 274          
+ 275          
+ 276          
+ 277          
+ 278          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    180    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     27    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

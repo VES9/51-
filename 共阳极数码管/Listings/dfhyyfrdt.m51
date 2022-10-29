@@ -1,0 +1,116 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/05/2022  21:14:27  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\fghn.obj TO .\Objects\dfhyyfrdt PRINT (.\Listings\dfhyyfrdt.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\fghn.obj (FGHN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\dfhyyfrdt (FGHN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     001AH     UNIT         ?DT?FGHN
+            IDATA   0022H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     008CH     UNIT         ?C_C51STARTUP
+            CODE    008FH     001FH     UNIT         ?C_INITSEG
+            CODE    00AEH     0019H     UNIT         ?PR?SEG?FGHN
+            CODE    00C7H     000FH     UNIT         ?PR?DELAY?FGHN
+            CODE    00D6H     0003H     UNIT         ?PR?MAIN?FGHN
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\dfhyyfrdt (FGHN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?FGHN
+  +--> ?C_INITSEG
+
+?PR?MAIN?FGHN
+  +--> ?PR?SEG?FGHN
+
+?PR?SEG?FGHN
+  +--> ?PR?DELAY?FGHN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\dfhyyfrdt (FGHN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        FGHN
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/05/2022  21:14:27  PAGE 2
+
+
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        AE
+  C:00C7H         PUBLIC        delay
+  D:00A0H         PUBLIC        AR
+  C:00D6H         PUBLIC        main
+  C:00AEH         PUBLIC        seg
+  D:0008H         PUBLIC        wei
+  D:0012H         PUBLIC        display
+  -------         PROC          DELAY
+  -------         DO            
+  D:0007H         SYMBOL        i
+  D:0006H         SYMBOL        j
+  D:0005H         SYMBOL        k
+  -------         ENDDO         
+  C:00C7H         LINE#         11
+  C:00C7H         LINE#         12
+  C:00C7H         LINE#         15
+  C:00C8H         LINE#         16
+  C:00C9H         LINE#         17
+  C:00CBH         LINE#         18
+  C:00CDH         LINE#         19
+  C:00CFH         LINE#         21
+  C:00CFH         LINE#         23
+  C:00CFH         LINE#         24
+  C:00D1H         LINE#         25
+  C:00D3H         LINE#         26
+  C:00D5H         LINE#         27
+  -------         ENDPROC       DELAY
+  -------         PROC          SEG
+  -------         DO            
+  D:0004H         SYMBOL        i
+  -------         ENDDO         
+  C:00AEH         LINE#         29
+  C:00AEH         LINE#         30
+  C:00AEH         LINE#         31
+  C:00B0H         LINE#         32
+  C:00B0H         LINE#         33
+  C:00B0H         LINE#         34
+  C:00B7H         LINE#         35
+  C:00BFH         LINE#         36
+  C:00C2H         LINE#         37
+  C:00C6H         LINE#         38
+  -------         ENDPROC       SEG
+  -------         PROC          MAIN
+  C:00D6H         LINE#         40
+  C:00D6H         LINE#         41
+  C:00D6H         LINE#         42
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        FGHN
+
+Program Size: data=35.0 xdata=0 code=217
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,69 @@
+C51 COMPILER V9.54   FGHN                                                                  09/16/2022 17:01:46 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE FGHN
+OBJECT MODULE PLACED IN .\Objects\fghn.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE fghn.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\fghn
+                    -.lst) TABS(2) OBJECT(.\Objects\fghn.obj)
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          #include <intrins.h>
+   3          #define uchar unsigned char
+   4          #define schar static char
+   5          #define uint unsigned int
+   6          sfr AE=0x90;
+   7          sfr AR=0xa0;
+   8          uchar display[]={0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90,0x88,0x83,0xC6,0xA1,0x86,0x8E};
+   9          uchar wei[]={0xFE,0xFD,0xFB,0xF7,0xEF,0xDF,0xBF,0x7F,0x7F,0x7F};
+  10          
+  11          void delay()    //@12.000MHz
+  12          {
+  13   1        uchar i, j, k;
+  14   1      
+  15   1        _nop_();
+  16   1        _nop_();
+  17   1        i = 5;
+  18   1        j = 144;
+  19   1        k = 71;
+  20   1        do
+  21   1        {
+  22   2          do
+  23   2          {
+  24   3            while (--k);
+  25   3          } while (--j);
+  26   2        } while (--i);
+  27   1      }
+  28          
+  29          void seg()
+  30          {
+  31   1        uchar i=0;
+  32   1        for(i=0;i<8;i++)
+  33   1        {
+  34   2          AE=display[i];
+  35   2          AR=~wei[i];
+  36   2          delay();
+  37   2        }
+  38   1      }
+  39          
+  40          void main()
+  41          {
+  42   1        seg();
+  43   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     43    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     26    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.54   FGHN                                                                  09/16/2022 17:01:46 PAGE 2   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
