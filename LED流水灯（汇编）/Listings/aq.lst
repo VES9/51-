@@ -1,0 +1,62 @@
+A51 MACRO ASSEMBLER  AQ                                                                   10/08/2022 22:21:46 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\aq.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE aq.a51 SET(SMALL) DEBUG PRINT(.\Listings\aq.lst) OBJECT(.\Objects\aq.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+0000                   9     ORG 0000H 
+0000 8000             10             JMP START 
+0002 7400             11             START:MOV A,#00H 
+0004 75F0FF           12                   MOV B,#0FFH 
+0007 F5A0             13                   MOV P2,A 
+0009 120014           14                       LCALL DELAY 
+000C 85F0A0           15                       MOV P2,B 
+000F 120014           16                       LCALL DELAY 
+0012 80EE             17                       JMP START 
+                      18                       
+                      19             
+0014                  20             DELAY: 
+                      21     
+0014 7FC8             22         DEL50:MOV R7,#200 
+0016 7E7D             23             DEL1: MOV R6,#125 
+0018 DEFE             24             DEL2: DJNZ R6,DEL2 
+001A DFFA             25                   DJNZ R7,DEL1 
+001C 22               26             RET 
+                      27             
+                      28             
+001D 80FE             29             JMP $ 
+                      30             END 
+                                     
+A51 MACRO ASSEMBLER  AQ                                                                   10/08/2022 22:21:46 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+DEL1 . . . . . . .  C ADDR   0016H   A   
+DEL2 . . . . . . .  C ADDR   0018H   A   
+DEL50. . . . . . .  C ADDR   0014H   A   
+DELAY. . . . . . .  C ADDR   0014H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0002H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

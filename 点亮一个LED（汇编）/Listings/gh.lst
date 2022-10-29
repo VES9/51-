@@ -1,0 +1,33 @@
+A51 MACRO ASSEMBLER  GH                                                                   10/08/2022 19:02:33 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\gh.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE gh.a51 SET(SMALL) DEBUG PRINT(.\Listings\gh.lst) OBJECT(.\Objects\gh.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 8000              2             JMP START
+0002 7400              3             START: MOV A,#00H
+0004 F5A0              4                    MOV P2,A
+0006 80FE              5                        JMP $
+                       6                                END
+                                     
+A51 MACRO ASSEMBLER  GH                                                                   10/08/2022 19:02:33 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0002H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

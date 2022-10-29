@@ -1,0 +1,62 @@
+A51 MACRO ASSEMBLER  QW                                                                   10/10/2022 19:56:32 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\QW.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE QW.a51 SET(SMALL) DEBUG PRINT(.\Listings\QW.lst) OBJECT(.\Objects\QW.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 020100            2     LJMP MAIN
+001B                   3     ORG 001BH
+001B 020113            4     LJMP INT
+0100                   5     ORG 0100H
+0100                   6     MAIN:
+0100 758910            7          MOV TMOD,#10H
+0103 758DD8            8              MOV TH1,#0D8H
+0106 758BF0            9              MOV TL1,#0F0H
+0109 7AC8             10              MOV R2,#200
+010B D2AF             11              SETB EA
+010D D2AB             12              SETB ET1
+010F D28E             13              SETB TR1
+0111 80FE             14              SJMP $
+0113                  15     INT:
+0113 DA04             16          DJNZ R2,NEXT
+                      17                 
+0115 B290             18              CPL P1.0
+0117 7AC8             19              MOV R2,#200
+0119 758DD8           20     NEXT:MOV TH1,#0D8H
+011C 758BF0           21              MOV TL1,#0F0H
+                      22     
+                      23     ;        SETB TR1
+011F 32               24              RETI
+                      25              END
+                             
+                             
+                                     
+A51 MACRO ASSEMBLER  QW                                                                   10/10/2022 19:56:32 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET1. . . . . . . .  B ADDR   00A8H.3 A   
+INT. . . . . . . .  C ADDR   0113H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+NEXT . . . . . . .  C ADDR   0119H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

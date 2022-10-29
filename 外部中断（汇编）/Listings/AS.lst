@@ -1,0 +1,109 @@
+A51 MACRO ASSEMBLER  AS                                                                   10/27/2022 13:07:34 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\AS.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE AS.a51 SET(SMALL) DEBUG PRINT(.\Listings\AS.lst) OBJECT(.\Objects\AS.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 020030            2     LJMP MAIN
+0003                   3     ORG 0003H
+0003 020100            4     LJMP K0
+0013                   5     ORG 0013H
+0013 020200            6     LJMP K1
+0030                   7     ORG 0030H
+                       8             
+0030 758130            9             MAIN:MOV SP,#30H        ;ÉèÖÃ¶ÑÕ»£¨¶ÑÕ»¿Õ¼ä£©£¬Ô­ÏÈµ¥Æ¬»úÉÏµçÊ±£¬SPÎª07H£¬ÕâÀïÏàµ±Ó
+                             Ú³õÊ¼»¯£¬°ÑSPÖµ¸ÄÎª30H
+0033 75A885           10             MOV IE,#85H;1000 0101.ÔÊÐíÍâ²¿ÖÐ¶Ï0£¬Íâ²¿ÖÐ¶Ï1ÖÐ¶Ï
+0036 75B804           11             MOV IP,#04H;Íâ²¿ÖÐ¶Ï1Îª¸ßÓÅÏÈ¼¶
+0039 758801           12             MOV TCON,#01H;Íâ²¿ÖÐ¶Ï0Îª±ßÑØ´¥·¢
+003C 7400             13             MOV A,#00H;½«Á¢¼´Ê00H×°ÈëAÖÐ
+                      14             
+003E F590             15             LP1:MOV P1,A;½«AÖÐµÄÄÚÈÝ×°ÈëP1ÖÐ
+0040 120300           16             LCALL DELAY;µ÷ÓÃÑÓÊ±º¯Ê
+0043 F4               17             CPL A;½«AÈ¡·´
+0044 80F8             18             SJMP LP1;Ìøµ½LP1
+                      19             
+0100                  20             ORG 0100H
+0100 C0E0             21             K0:PUSH ACC;ÕâÊÇ¶ÑÕ»£¬±íÊ¾½«µ±Ç°¼Ä´æÆ÷µÄÄÚÈÝ·Åµ½¶ÑÕ»ÖÐ£¬È¡³öÔòÓÃPOP A
+0102 C0D0             22             PUSH PSW;½«³ÌÐò×´Ì¬×ÖÑ¹Õ»
+0104 C2D4             23             CLR RS1;Ñ¡ÔñµÚÒ»×é¹¤×÷¼Ä´æÆ÷
+0106 D2D3             24             SETB RS0;
+0108 7A07             25             MOV R2,#07H;½«Á¢¼´Ê07H×°ÈëR2ÖÐ
+010A 74FE             26             MOV A,#0FEH;1111 1110£¬ÎªµÆµãÁÁµÄ³õÊ¼×´Ì¬
+                      27             
+010C F590             28             NEXT0:MOV P1,A;½«AÖÐµÄÄÚÈÝ×°ÈëP1ÖÐ
+010E 120300           29             LCALL DELAY;µ÷ÓÃÑÓÊ±º¯Ê
+0111 23               30             RL A;Ñ­»·×óÒÆÖ¸Áî£¬Ö´ÐÐÒ»´Î£¬ÀÛ¼ÓÆ÷ÖÐµÄÖµ×óÒÆÒ»Î»£¬×î¸ßÎ»ÒÆµ½×îµÍÎ»£¬µãÁÁ×ó±ßÒ»ÕµµÆ
+0112 DAF8             31             DJNZ R2,NEXT0;R2-1£¬ÅÐ¶Ï¸ÃÖµÊÇ·ñÎª0£¬Èô¹ûµÈÓÚ0£¬ÍùÏÂÖ´ÐÐ£¬Èç¹û²»µÈÓÚ0£¬×ªµ½NEXT0
+0114 D0D0             32             POP PSW;½«³ÌÐò×´Ì¬×Ö³öÕ»
+0116 D0E0             33             POP ACC;
+0118 32               34             RETI;ÖÐ¶Ï·µ»ØÖ¸Áî£¬ÓÃÓÚ´ÓÖÐ¶Ï·þÎñ³ÌÐòÖÐ·µ»Ø
+                      35             
+0200                  36             ORG 0200H
+0200 C0E0             37             K1:PUSH ACC;
+0202 C0D0             38             PUSH PSW;
+0204 C2D4             39             CLR RS1;
+0206 D2D3             40             SETB RS0;
+0208 7A07             41             MOV R2,#07H;
+020A 747F             42             MOV A,#07FH;
+                      43             
+020C                  44             NEXT1:
+020C F590             45             MOV P1,A
+020E 120300           46             LCALL DELAY
+0211 23               47             RL A
+0212 DAF8             48             DJNZ R2,NEXT1
+0214 D0D0             49             POP PSW
+0216 D0E0             50             POP ACC
+0218 32               51             RETI
+                      52             
+0300                  53             ORG 0300H
+0300 7BFA             54                     DELAY:MOV R3,#250
+0302 7AF8             55                     DEL2:MOV R2,#248
+0304 DBFC             56                     DJNZ R3,DEL2
+A51 MACRO ASSEMBLER  AS                                                                   10/27/2022 13:07:34 PAGE     2
+
+0306 22               57                     RET;×Ó³ÌÐò·µ»Ø
+                      58                     END
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                                             
+A51 MACRO ASSEMBLER  AS                                                                   10/27/2022 13:07:34 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+DEL2 . . . . . . .  C ADDR   0302H   A   
+DELAY. . . . . . .  C ADDR   0300H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+IP . . . . . . . .  D ADDR   00B8H   A   
+K0 . . . . . . . .  C ADDR   0100H   A   
+K1 . . . . . . . .  C ADDR   0200H   A   
+LP1. . . . . . . .  C ADDR   003EH   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+NEXT0. . . . . . .  C ADDR   010CH   A   
+NEXT1. . . . . . .  C ADDR   020CH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+RS0. . . . . . . .  B ADDR   00D0H.3 A   
+RS1. . . . . . . .  B ADDR   00D0H.4 A   
+SP . . . . . . . .  D ADDR   0081H   A   
+TCON . . . . . . .  D ADDR   0088H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

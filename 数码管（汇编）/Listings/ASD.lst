@@ -1,0 +1,135 @@
+A51 MACRO ASSEMBLER  ASD                                                                  10/08/2022 21:22:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02c
+OBJECT MODULE PLACED IN .\Objects\ASD.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ASD.a51 SET(SMALL) DEBUG PRINT(.\Listings\ASD.lst) OBJECT(.\Objects\ASD
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+  0080                 9     D EQU P0
+  00A0                10             W EQU P2
+                      11     
+0000                  12     ORG 0000H 
+0000 8000             13             JMP START 
+0002 120007           14             START:LCALL DISPALY
+0005 0102             15                   AJMP START
+                      16             
+0007 74C0             17       DISPALY:MOV A,#0xC0
+0009 F580             18                   MOV D,A
+000B 75F001           19                       MOV B,#0x01
+000E 85F0A0           20                       MOV W,B
+0011 120070           21                       LCALL DELAY300MS
+                      22     
+0014 74F9             23               MOV A,#0xF9
+0016 F580             24                   MOV D,A
+0018 75F002           25                       MOV B,#0x02
+001B 85F0A0           26                       MOV W,B
+001E 120070           27                       LCALL DELAY300MS
+                      28                     
+0021 74A4             29                       MOV A,#0xA4
+0023 F580             30                   MOV D,A
+0025 75F004           31                       MOV B,#0x04
+0028 85F0A0           32                       MOV W,B
+002B 120070           33                       LCALL DELAY300MS
+                      34                       
+002E 74B0             35                       MOV A,#0xB0
+0030 F580             36                   MOV D,A
+0032 75F008           37                       MOV B,#0x08
+0035 85F0A0           38                       MOV W,B
+0038 120070           39                       LCALL DELAY300MS
+                      40                       
+003B 7499             41                       MOV A,#0x99
+003D F580             42                   MOV D,A
+003F 75F010           43                       MOV B,#0x10
+0042 85F0A0           44                       MOV W,B
+0045 120070           45                       LCALL DELAY300MS
+                      46                       
+0048 7492             47                       MOV A,#0x92
+004A F580             48                   MOV D,A
+004C 75F020           49                       MOV B,#0x20
+004F 85F0A0           50                       MOV W,B
+0052 120070           51                       LCALL DELAY300MS
+                      52                       
+0055 7482             53                       MOV A,#0x82
+0057 F580             54                   MOV D,A
+0059 75F040           55                       MOV B,#0x40
+005C 85F0A0           56                       MOV W,B
+005F 120070           57                       LCALL DELAY300MS
+A51 MACRO ASSEMBLER  ASD                                                                  10/08/2022 21:22:09 PAGE     2
+
+                      58                       
+0062 74F8             59                       MOV A,#0xF8
+0064 F580             60                   MOV D,A
+0066 75F080           61                       MOV B,#0x80
+0069 85F0A0           62                       MOV W,B
+006C 120070           63                       LCALL DELAY300MS
+006F 22               64                   RET
+                      65             
+0070                  66     DELAY300MS:                     ;@12.000MHz
+0070 00               67                      NOP
+0071 00               68                      NOP
+0072 00               69                      NOP
+0073 C030             70                      PUSH 30H
+0075 C031             71                      PUSH 31H
+0077 C032             72                      PUSH 32H
+0079 75300B           73                      MOV 30H,#11
+007C 7531F2           74                      MOV 31H,#242
+007F 75327C           75                      MOV 32H,#124
+0082                  76          NEXT:
+0082 D532FD           77                      DJNZ 32H,NEXT
+0085 D531FA           78                      DJNZ 31H,NEXT
+0088 D530F7           79                      DJNZ 30H,NEXT
+008B D032             80                      POP 32H
+008D D031             81                      POP 31H
+008F D030             82                      POP 30H
+0091 22               83                      RET
+                      84     
+0092                  85             DELAY: 
+                      86     
+0092 7FC8             87         DEL50:MOV R7,#200 
+0094 7E7D             88             DEL1: MOV R6,#125 
+0096 DEFE             89             DEL2: DJNZ R6,DEL2 
+0098 DFFA             90                   DJNZ R7,DEL1 
+009A 22               91             RET 
+                      92             
+                      93             
+009B 80FE             94             JMP $ 
+                      95             END 
+                                     
+A51 MACRO ASSEMBLER  ASD                                                                  10/08/2022 21:22:09 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+D. . . . . . . . .  D ADDR   0080H   A   
+DEL1 . . . . . . .  C ADDR   0094H   A   
+DEL2 . . . . . . .  C ADDR   0096H   A   
+DEL50. . . . . . .  C ADDR   0092H   A   
+DELAY. . . . . . .  C ADDR   0092H   A   
+DELAY300MS . . . .  C ADDR   0070H   A   
+DISPALY. . . . . .  C ADDR   0007H   A   
+NEXT . . . . . . .  C ADDR   0082H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0002H   A   
+W. . . . . . . . .  D ADDR   00A0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
